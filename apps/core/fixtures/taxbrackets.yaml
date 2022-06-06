@@ -1,0 +1,49 @@
+- model: core.TaxBracket
+  pk: 1
+  fields:
+    min_limit: 0
+    max_limit: 2000
+    rate_percent: 0
+    active: true
+    country_id: 1
+
+- model: core.TaxBracket
+  pk: 2
+  fields:
+    min_limit: 2001
+    max_limit: 5000
+    rate_percent: 5
+    active: true
+    country_id: 1
+
+- model: core.TaxBracket
+  pk: 3
+  fields:
+    min_limit: 5001
+    max_limit: 10000
+    rate_percent: 10
+    active: true
+    country_id: 1
+
+- model: core.TaxBracket
+  pk: 4
+  fields:
+    min_limit: 10001
+    max_limit: 15000
+    rate_percent: 15
+    active: true
+    country_id: 1
+
+- model: core.TaxBracket
+  pk: 5
+  fields:
+    min_limit: 15001
+    max_limit: 1000000000
+    rate_percent: 20
+    active: true
+    country_id: 1
+
+
+
+
+

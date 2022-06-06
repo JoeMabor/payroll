@@ -1,0 +1,5 @@
+- model: core.Country
+  pk: 1
+  fields:
+    name: "South Sudan"
+    description: "South Sudan Payroll"
