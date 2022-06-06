@@ -69,3 +69,41 @@ class Employee(TimestampModel):
     @property
     def is_paid_hourly(self):
         return self.pay_type == PayTypes.HOURLY
+
+    def __str__(self):
+        return f"{self.first_name} {self.surname}"
+
+
+class Allowance(TimestampModel):
+    name = models.CharField(max_length=250)
+    description = models.TextField(max_length=250, null=True, blank=True)
+    is_percent = models.BooleanField(default=True)
+    value = models.DecimalField(max_digits=12, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+
+class EmployeeAllowance(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    allowance = models.ForeignKey(Allowance, on_delete=models.CASCADE)
+    remark = models.TextField(max_length=250, null=True, blank=True)
+
+    class Meta:
+        unique_together = ("employee", "allowance")
+
+
+class Deduction(TimestampModel):
+    name = models.CharField(max_length=250)
+    description = models.TextField(max_length=250, null=True, blank=True)
+    is_percent = models.BooleanField(default=False)
+    value = models.DecimalField(max_digits=12, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+
+class EmployeeDeduction(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    deduction = models.ForeignKey(Deduction, on_delete=models.CASCADE)
+    remarks = models.TextField(max_length=250, null=True, blank=True)

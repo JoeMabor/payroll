@@ -4,7 +4,7 @@ import datetime
 from django.db import models
 
 from apps.core.models import TimestampModel, TaxBracket
-from apps.employees.models import Employee
+from apps.employees.models import Employee, EmployeeAllowance, EmployeeDeduction
 from .use_cases.data_models import Calendar, PayrollStatus, PayStatus
 
 today = datetime.datetime.now()
@@ -43,6 +43,12 @@ class Pay(TimestampModel):
     net_pay = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     tax_bracket = models.ForeignKey(TaxBracket, on_delete=models.CASCADE, null=True)
     tax_amount = models.DecimalField(max_digits=12, decimal_places=2, null=True)
+    allowances = models.ManyToManyField(EmployeeAllowance)
+    deductions = models.ManyToManyField(EmployeeDeduction)
 
     class Meta:
         unique_together = ("payroll", "employee")
+
+
+class PayAllowance(models.Model):
+    pay = models.ForeignKey(Pay, on_delete=models.CASCADE)

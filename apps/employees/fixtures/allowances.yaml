@@ -1,0 +1,29 @@
+- model: employees.Allowance
+  pk: 1
+  fields:
+    name: "Housing Allowance"
+    value: 100.00
+    description: "Housing Allowance"
+
+- model: employees.Allowance
+  pk: 2
+  fields:
+    name: "Transport Allowance"
+    value: 50.00
+    description: "Transport Allowance"
+
+- model: employees.Allowance
+  pk: 3
+  fields:
+    name: "Hardship Allowance"
+    is_percent: true
+    value: 0.2
+    description: "Hardship Allowance"
+
+- model: employees.Allowance
+  pk: 4
+  fields:
+    name: "Medical Allowance"
+    is_percent: true
+    value: 0.17
+    description: "Medical Allowance"
