@@ -39,6 +39,9 @@ class Pay(TimestampModel):
     payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=PayStatus.statuses(), default=PayStatus.NOT_PAID)
+    basic_salary = models.DecimalField(max_digits=12, decimal_places=2, null=True)
+    total_allowance = models.DecimalField(max_digits=12, decimal_places=2, null=True)
+    total_deduction = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     gross_pay = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     net_pay = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     tax_bracket = models.ForeignKey(TaxBracket, on_delete=models.CASCADE, null=True)
@@ -52,3 +55,6 @@ class Pay(TimestampModel):
 
 class PayAllowance(models.Model):
     pay = models.ForeignKey(Pay, on_delete=models.CASCADE)
+
+   
+

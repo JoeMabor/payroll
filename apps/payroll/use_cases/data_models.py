@@ -31,8 +31,12 @@ class Calendar:
 class SavePayData:
     payroll_id: int
     empl_id: int
+    basic_salary: Decimal
+    total_allowance: Decimal
+    total_deduction: Decimal
     gross_pay: Decimal
     net_pay: Decimal
     tax_bracket_id: int
     tax_amount: Decimal
     status: str = PayStatus.NOT_PAID
+    empl_allowances: list = None

@@ -19,6 +19,5 @@ class NetPayCalcData:
 @dataclass
 class NetPayCalcResultData:
     """Data structure for Net Pay calculation results"""
-
     net_pay: Decimal
     tax: Decimal

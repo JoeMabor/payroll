@@ -58,7 +58,6 @@ class PayViewSet(ViewSet):
         serializer = PayInputSerializer(data=request.data)
         if serializer.is_valid():
             data = serializer.data
-            print(data["employees"])
             pays = self.payroll_runner.pay_employees(payroll_id=data["payroll"], empl_ids=data["employees"])
             serializer = PayOutputSerializer(pays, many=True)
             return Response(serializer.data)
