@@ -8,7 +8,7 @@ from apps.employees.models import Employee, EmployeeAllowance, EmployeeDeduction
 from .use_cases.data_models import Calendar, PayrollStatus, PayStatus
 
 today = datetime.datetime.now()
-month_first_day, month_last_day = calendar.monthrange(today.year, today.month)
+month_first_weekday, month_last_day = calendar.monthrange(today.year, today.month)
 
 
 class Payroll(TimestampModel):
@@ -28,11 +28,12 @@ class Payroll(TimestampModel):
         max_length=10, choices=CALENDARS, default=Calendar.MONTHLY
     )
     begin_at = models.DateField(
-        default=datetime.date(year=today.year, month=today.month, day=month_first_day)
+        default=datetime.date(year=today.year, month=today.month, day=1)
     )
     end_at = models.DateField(
         default=datetime.date(year=today.year, month=today.month, day=month_last_day)
     )
+    status = models.CharField(max_length=10, choices=PayrollStatus.statuses(), default=PayrollStatus.DRAFT)
 
 
 class Pay(TimestampModel):
@@ -51,10 +52,3 @@ class Pay(TimestampModel):
 
     class Meta:
         unique_together = ("payroll", "employee")
-
-
-class PayAllowance(models.Model):
-    pay = models.ForeignKey(Pay, on_delete=models.CASCADE)
-
-   
-

@@ -50,7 +50,9 @@ class PayViewSet(ViewSet):
     payroll_runner = PayrollRunner()
 
     def list(self, request):
-        objs = get_pays()
+        payroll_id = request.GET.get("payroll")
+        employee_id = request.GET.get("employee")
+        objs = get_pays(payroll_id, employee_id)
         serializer = PayOutputSerializer(objs, many=True)
         return Response(serializer.data)
 
@@ -67,6 +69,7 @@ class PayViewSet(ViewSet):
     def retrieve(self, request, pk=None):
         obj = get_pay_by_id(pk)
         serializer = PayOutputSerializer(obj)
+
         return Response(serializer.data)
 
     def update(self, request, pk=None):

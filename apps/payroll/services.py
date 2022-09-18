@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from .models import Payroll, Pay
 from .use_cases.data_models import SavePayData
 
@@ -8,8 +10,15 @@ def get_payrolls():
     return payrolls
 
 
-def get_pays():
-    return Pay.objects.all()
+def get_pays(payroll_id=None, empl_id=None):
+    if payroll_id and not empl_id:
+        return Pay.objects.filter(payroll_id=payroll_id)
+    elif empl_id and not payroll_id:
+        return Pay.objects.filter(employee_id=empl_id)
+    elif payroll_id and empl_id:
+        return Pay.objects.filter(payroll_id=payroll_id, employee_id=empl_id)
+    else:
+        return Pay.objects.all()
 
 
 def get_payroll_by_id(id_):

@@ -6,6 +6,13 @@ class PayrollStatus:
     DRAFT = "DRAFT"
     APPROVED = "APPROVED"
 
+    @classmethod
+    def statuses(cls):
+        return (
+            (cls.DRAFT, "DRAFT"),
+            (cls.APPROVED, "APPROVED")
+        )
+
 
 class PayStatus:
     NOT_PAID = "NOT_PAID"
